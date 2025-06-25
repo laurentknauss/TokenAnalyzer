@@ -64,3 +64,86 @@ Contributions are welcome! To contribute:
 ## 📄 License
 
 This project is licensed under the MIT License. See the `LICENSE` file for details.
+
+📁 Project Architecture
+
+```text
+src/
+├── types.ts           # 🏗️ TypeScript Definitions
+├── pricing.ts         # 💰 Price and model management
+├── tokenAnalysis.ts   # 🔍 Token analysis and processing
+├── sessionStats.ts    # 📊 Session statistics
+├── display.ts         # 🖥️ Display and formatting
+└── index.ts           # 🚀 Main entry point
+```
+
+📄 Detailed description of each file
+
+**types.ts** - 🏗️ TypeScript Foundations  
+**Role:** Defines all interfaces and types used in the application  
+**Contains:**
+- **TokenAnalysis:** Structure of token analyses
+- **ModelPricing:** Model pricing
+- **SessionStats:** Session statistics
+- **OptimizationResult:** Optimization results
+- **Utility types** (UseCase, TokenType, etc.)
+
+**pricing.ts** - 💰 Economic Manager  
+**Role:** Handles everything related to model pricing and recommendations  
+**Main functions:**
+- **MODEL_PRICING:** 2025 pricing database
+- **calculateCost():** Calculates the cost of a request
+- **getModelRecommendation():** Recommends a model based on usage
+- **getPricingEvolution():** Compares 2024 vs 2025 prices
+
+**tokenAnalysis.ts** - 🔍 Analysis Engine  
+**Role:** Core of token analysis and optimization  
+**Main functions:**
+- **createEncoder():** Creates an encoder for a model
+- **analyzeTokens():** Complete analysis of a text
+- **optimizePrompt():** Optimizes a prompt to reduce tokens
+- **compareModels():** Compares tokens across different models
+- **getTokenBreakdown():** Breaks down tokens one by one
+
+**sessionStats.ts** - 📊 Data Manager  
+**Role:** Manages statistics and data persistence  
+**Main functions:**
+- **createSessionStats():** Initializes a new session
+- **updateSessionStats():** Updates statistics
+- **saveSessionStats():** Saves as JSON
+- **displaySessionStats():** Displays the session summary
+
+**display.ts** - 🖥️ User Interface  
+**Role:** Handles all console display and formatting  
+**Main functions:**
+- **displayDetailedReport():** Full analysis report
+- **displayModelComparison():** Shows model comparison
+- Table and statistics formatting
+
+**index.ts** - 🚀 Orchestrator  
+**Role:** Entry point that coordinates all modules  
+**Responsibilities:**
+- Initializes OpenAI and the encoder
+- Orchestrates the analysis flow
+- Handles API calls
+- Coordinates result display
+
+🔄 Data Flow
+
+```text
+index.ts (orchestration)
+    ↓
+tokenAnalysis.ts (prompt analysis)
+    ↓
+pricing.ts (cost calculation)
+    ↓
+OpenAI API (call)
+    ↓
+tokenAnalysis.ts (response analysis)
+    ↓
+sessionStats.ts (stats update)
+    ↓
+display.ts (final display)
+    ↓
+sessionStats.ts (saving)
+```
