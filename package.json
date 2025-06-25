@@ -1,0 +1,33 @@
+{
+  
+  "name": "tokenanalyzer",
+  "version": "1.0.0",
+  "description": "",
+  "license": "MIT ",
+  "author": {
+   "name": "laurent knauss"
+  },
+  "type": "module ",
+  "main": "./lib/index.js",
+  "scripts": {
+    "dev": "tsx src/index.ts", 
+    "build": "tsc",
+    "start": "node dist/index.js"
+  },
+
+"devDependencies": {
+"@types/node": "^20.0.0",
+"tsx": "^4.0.0",
+"typescript": "^5.0.0"
+},
+"dependencies": {
+"dotenv": "^16.0.0",
+"openai": "^4.0.0",
+
+"@types/node": "24.0.4",
+"typescript": "5.8.3", 
+"tiktoken": "^1.0.0"
+}
+}
+
+

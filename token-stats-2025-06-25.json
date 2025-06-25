@@ -1,0 +1,15 @@
+{
+  "totalRequests": 1,
+  "totalPromptTokens": 13,
+  "totalResponseTokens": 15,
+  "totalCost": 0.000013999999999999998,
+  "startTime": "2025-06-25T14:41:06.767Z",
+  "conversations": [
+    {
+      "timestamp": "2025-06-25T14:41:08.737Z",
+      "promptTokens": 13,
+      "responseTokens": 15,
+      "cost": 0.000013999999999999998
+    }
+  ]
+}
