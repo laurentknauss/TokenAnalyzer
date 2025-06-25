@@ -2,12 +2,15 @@
   
   "name": "tokenanalyzer",
   "version": "1.0.0",
-  "description": "",
-  "license": "MIT ",
+  "description": "TokenAnalyzer is a CLI for advanced token analysis and optimization of OpenAI prompts, featuring token measurement, prompt optimization, model comparison, and session statistics.",
+  "keywords": ["token analyzer", "openai", "prompt optimization", "cli", "typescript"],
+  "private": true,
+  "license": "MIT",
+  
   "author": {
    "name": "laurent knauss"
   },
-  "type": "module ",
+  "type": "module",
   "main": "./lib/index.js",
   "scripts": {
     "dev": "tsx src/index.ts", 
@@ -18,11 +21,11 @@
 "devDependencies": {
 "@types/node": "^20.0.0",
 "tsx": "^4.0.0",
-"typescript": "^5.0.0"
+"typescript": "^5.0.0"    
 },
 "dependencies": {
 "dotenv": "^16.0.0",
-"openai": "^4.0.0",
+"openai": "^4.0.0", 
 
 "@types/node": "24.0.4",
 "typescript": "5.8.3", 
