@@ -44,8 +44,6 @@ TokenAnalyzer is a CLI tool for advanced analysis and optimization of OpenAI pro
 
 - `npm run build` : Compile TypeScript to JavaScript in `dist/`  
 - `npm start`     : Run the application from `dist/index.js`  
-- `npm run lint`  : Run TSLint for code quality  
-- `npm test`      : Execute tests (to be implemented)  
 
 ## 🛠️ Features
 
