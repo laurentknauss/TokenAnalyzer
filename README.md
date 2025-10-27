@@ -1,35 +1,68 @@
 # TokenAnalyzer 📝
 
-TokenAnalyzer is a CLI tool for advanced analysis and optimization of OpenAI prompts. It measures tokens, compares models, and generates session statistics.
+[![npm version](https://img.shields.io/npm/v/@laurentknauss/tokenanalyzer.svg)](https://www.npmjs.com/package/@laurentknauss/tokenanalyzer)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
+[![TypeScript](https://img.shields.io/badge/TypeScript-5.8-blue.svg)](https://www.typescriptlang.org/)
+[![Node.js](https://img.shields.io/badge/Node.js-20%2B-green.svg)](https://nodejs.org/)
+[![GitHub issues](https://img.shields.io/github/issues/laurentknauss/TokenAnalyzer.svg)](https://github.com/laurentknauss/TokenAnalyzer/issues)
+[![GitHub stars](https://img.shields.io/github/stars/laurentknauss/TokenAnalyzer.svg?style=social&label=Star)](https://github.com/laurentknauss/TokenAnalyzer/stargazers)
+[![GitHub forks](https://img.shields.io/github/forks/laurentknauss/TokenAnalyzer.svg?style=social&label=Fork)](https://github.com/laurentknauss/TokenAnalyzer/network/members)
 
-## 🚀 Installation
+**TokenAnalyzer** is a powerful CLI tool for advanced token analysis and optimization of OpenAI prompts. Measure token usage, optimize prompt costs, compare models, and track session statistics—all from your terminal.
 
-1. Clone the repository  
-   ```bash
-   git clone https://github.com/your-organization/TokenAnalyzer.git
-   cd TokenAnalyzer
-   ```
-2. Install dependencies  
-   ```bash
-   npm install
-   ```
+## Why TokenAnalyzer?
 
-## ⚙️ Configuration
+- **Cost Optimization**: Reduce your OpenAI API costs by analyzing and optimizing token usage
+- **Model Comparison**: Compare token counts across different GPT models before making API calls
+- **Real-time Analysis**: Get instant feedback on prompt efficiency with detailed token breakdowns
+- **Session Tracking**: Monitor your API usage with comprehensive statistics and cost estimates
 
-1. Copy `.env.example` to `.env`:  
-   ```bash
-   cp .env.example .env
-   ```
-2. Open `.env` and set your OpenAI API key:  
-   ```
-   OPENAI_API_KEY=your_api_key_here
-   NODE_ENV=development
-   LOG_LEVEL=info
-   ```
+## 🚀 Quick Start
 
+### Installation
+
+```bash
+# Clone the repository
+git clone https://github.com/laurentknauss/TokenAnalyzer.git
+cd TokenAnalyzer
+
+# Install dependencies
+npm install
+
+# Set up environment variables
+cp .env.example .env
+# Edit .env and add your OpenAI API key
+```
+
+### Basic Usage
+
+```bash
+# Build the project
+npm run build
+
+# Run the analyzer
+npm start
+
+# Or use in development mode
+npm run dev
+```
+
+### Example Analysis
+
+```typescript
+// Example: Analyze a prompt
+const prompt = "Explain quantum computing in simple terms";
+
+// TokenAnalyzer will show:
+// - Total tokens: 8
+// - Estimated cost: $0.00024 (GPT-4)
+// - Token breakdown by word
+// - Optimization suggestions
+// - Model comparisons
+```
 ## 📦 Project Structure
 
-```
+```text
 .
 ├── src/                  TypeScript source code
 ├── dist/                 Compiled JavaScript output
@@ -39,31 +72,43 @@ TokenAnalyzer is a CLI tool for advanced analysis and optimization of OpenAI pro
 ├── tsconfig.json         TypeScript configuration
 └── package.json          Dependencies and scripts
 ```
-
 ## 🔧 NPM Scripts
 
 - `npm run build` : Compile TypeScript to JavaScript in `dist/`  
 - `npm start`     : Run the application from `dist/index.js`  
 
-## 🛠️ Features
+## 🛠️ Key Features
 
-- **Token Analysis**      : Detailed count of tokens used  
-- **Prompt Optimization** : Suggestions to reduce prompt size  
-- **Model Comparison**    : Evaluate different OpenAI models  
-- **Session Statistics**  : Track tokens, estimated costs, and performance  
-- **Detailed Reporting**  : JSON export or console output  
+- **Token Analysis**: Get detailed token counts for any prompt before sending to OpenAI
+- **Cost Estimation**: Calculate exact costs across GPT-3.5, GPT-4, and other models
+- **Prompt Optimization**: AI-powered suggestions to reduce token usage without losing meaning
+- **Model Comparison**: Side-by-side comparison of token counts across different models
+- **Session Statistics**: Track total tokens, costs, and API usage over time
+- **JSON Export**: Save analysis results and statistics for later review
+- **Real-time Feedback**: Instant token breakdown and optimization recommendations  
+
+## 💡 Use Cases
+
+- **API Cost Optimization**: Analyze prompts before production to reduce OpenAI costs
+- **Prompt Engineering**: Test different prompt variations and choose the most efficient one
+- **Budget Planning**: Estimate API costs for your application based on expected usage
+- **Development Testing**: Debug token-related issues during development
+- **Model Selection**: Determine the most cost-effective model for your use case
 
 ## 🤝 Contributing
 
-Contributions are welcome! To contribute:  
-1. Fork the repo  
-2. Create a branch `feature/xxx`  
-3. Make your changes  
-4. Open a Pull Request  
+Contributions are welcome! Please see [CONTRIBUTING.md](CONTRIBUTING.md) for guidelines.
+
+Quick start:
+1. Fork the repository
+2. Create a feature branch: `git checkout -b feature/amazing-feature`
+3. Commit your changes: `git commit -m 'Add amazing feature'`
+4. Push to the branch: `git push origin feature/amazing-feature`
+5. Open a Pull Request
 
 ## 📄 License
 
-This project is licensed under the MIT License. See the `LICENSE` file for details.
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
 📁 Project Architecture
 

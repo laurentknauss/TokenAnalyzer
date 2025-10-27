@@ -1,15 +1,22 @@
 {
-  
-  "name": "tokenanalyzer",
+  "name": "@laurentknauss/tokenanalyzer",
   "version": "1.0.0",
   "description": "TokenAnalyzer is a CLI for advanced token analysis and optimization of OpenAI prompts, featuring token measurement, prompt optimization, model comparison, and session statistics.",
-  "keywords": ["token analyzer", "openai", "prompt optimization", "cli", "typescript"],
-  "private": true,
+  "keywords": ["token analyzer", "openai", "prompt optimization", "cli", "typescript", "tiktoken", "gpt", "token-counter", "openai-api", "cost-optimization"],
+  "private": false,
   "license": "MIT",
-  
   "author": {
-   "name": "laurent knauss"
+    "name": "Laurent Knauss",
+    "url": "https://github.com/laurentknauss"
   },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/laurentknauss/TokenAnalyzer.git"
+  },
+  "bugs": {
+    "url": "https://github.com/laurentknauss/TokenAnalyzer/issues"
+  },
+  "homepage": "https://github.com/laurentknauss/TokenAnalyzer#readme",
   "type": "module",
   "main": "./lib/index.js",
   "scripts": {
