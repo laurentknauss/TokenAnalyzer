@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "TokenAnalyzer is a CLI for advanced token analysis and optimization of OpenAI prompts, featuring token measurement, prompt optimization, model comparison, and session statistics.",
   "keywords": ["token analyzer", "openai", "prompt optimization", "cli", "typescript", "tiktoken", "gpt", "token-counter", "openai-api", "cost-optimization"],
-  "private": false,
+  "private": true,
   "license": "MIT",
   "author": {
     "name": "Laurent Knauss",
