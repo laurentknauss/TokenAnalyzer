@@ -1,31 +1,38 @@
 import { encoding_for_model, type Tiktoken, type TiktokenModel } from "tiktoken";
-import type { TokenAnalysis, TokenBreakdown, EfficiencyMetrics, OptimizationResult, ModelComparison } from './types.js';
+import type { TokenAnalysis, TokenBreakdown, EfficiencyMetrics, OptimizationResult, ModelComparison, TokenType } from './types.js';
 import { calculateCost, MODEL_PRICING } from './pricing.js';
 
 export const createEncoder = (model: string): Tiktoken => {
   return encoding_for_model(model as TiktokenModel);
 };
 
-export const analyzeTokens = (text: string, model: string, encoder: Tiktoken): TokenAnalysis => {
+export const analyzeTokens = (
+  text: string,
+  model: string,
+  encoder: Tiktoken,
+  type: TokenType = 'input'
+): TokenAnalysis => {
   const tokens = encoder.encode(text);
   const tokenArray = Array.from(tokens);
 
   return {
     totalTokens: tokens.length,
     tokenList: tokenArray,
-    estimatedCost: calculateCost(tokens.length, model, 'input'),
+    estimatedCost: calculateCost(tokens.length, model, type),
     breakdown: getTokenBreakdown(tokens, encoder),
     efficiency: calculateEfficiency(text, tokens.length)
   };
 };
+
 const getTokenBreakdown = (tokens: Uint32Array, encoder: Tiktoken): TokenBreakdown[] => {
   const breakdown: TokenBreakdown[] = [];
+  const decoder = new TextDecoder();
 
   for (let i = 0; i < tokens.length; i++) {
     try {
       const singleTokenArray = new Uint32Array([tokens[i]]);
       const decoded = encoder.decode(singleTokenArray);
-      const singleToken = new TextDecoder().decode(decoded);
+      const singleToken = decoder.decode(decoded);
       breakdown.push({
         tokenId: tokens[i],
         text: singleToken,
@@ -43,10 +50,18 @@ const getTokenBreakdown = (tokens: Uint32Array, encoder: Tiktoken): TokenBreakdo
   return breakdown;
 };
 
-
 const calculateEfficiency = (text: string, tokenCount: number): EfficiencyMetrics => {
+  if (tokenCount === 0) {
+    return {
+      charactersPerToken: '0.00',
+      wordsPerToken: '0.00',
+      efficiency: 'Faible'
+    };
+  }
+
   const charPerToken = text.length / tokenCount;
-  const wordCount = text.split(/\s+/).length;
+  const trimmedText = text.trim();
+  const wordCount = trimmedText ? trimmedText.split(/\s+/).length : 0;
   const wordPerToken = wordCount / tokenCount;
 
   const efficiency = charPerToken > 3 ? "Excellente" : charPerToken > 2 ? "Bonne" : "Faible";
@@ -105,17 +120,19 @@ export const compareModels = (prompt: string): ModelComparison => {
   const comparison: ModelComparison = {};
 
   models.forEach(model => {
+    let encoder: Tiktoken | undefined;
     try {
-      const encoder = createEncoder(model);
+      encoder = createEncoder(model);
       const tokens = encoder.encode(prompt);
       comparison[model] = {
         tokens: tokens.length,
         estimatedCost: calculateCost(tokens.length, model, 'input'),
         pricing: MODEL_PRICING[model]
       };
-      encoder.free();
     } catch (error) {
       comparison[model] = { error: "Modèle non supporté" };
+    } finally {
+      encoder?.free();
     }
   });
 
