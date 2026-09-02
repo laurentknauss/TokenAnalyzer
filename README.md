@@ -7,28 +7,29 @@
 [![GitHub stars](https://img.shields.io/github/stars/laurentknauss/TokenAnalyzer.svg?style=social&label=Star)](https://github.com/laurentknauss/TokenAnalyzer/stargazers)
 [![GitHub forks](https://img.shields.io/github/forks/laurentknauss/TokenAnalyzer.svg?style=social&label=Fork)](https://github.com/laurentknauss/TokenAnalyzer/network/members)
 
-**TokenAnalyzer** is a powerful CLI tool for advanced token analysis and optimization of OpenAI prompts. Measure token usage, optimize prompt costs, compare models, and track session statistics—all from your terminal.
+**TokenAnalyzer** is a TypeScript CLI for token analysis, prompt optimization, model comparison, and session statistics for OpenAI API usage.
 
 ## Why TokenAnalyzer?
 
-- **Cost Optimization**: Reduce your OpenAI API costs by analyzing and optimizing token usage
-- **Model Comparison**: Compare token counts across different GPT models before making API calls
-- **Real-time Analysis**: Get instant feedback on prompt efficiency with detailed token breakdowns
-- **Session Tracking**: Monitor your API usage with comprehensive statistics and cost estimates
+- **Cost Estimation**: Estimate input and output token costs using the pricing table configured in `src/pricing.ts`
+- **Model Comparison**: Compare token counts across supported models before making API calls
+- **Token Analysis**: Inspect token counts, token breakdowns, and basic text-efficiency metrics
+- **Prompt Optimization**: Apply lightweight prompt-cleanup heuristics and receive optimization suggestions
+- **Session Tracking**: Track prompt tokens, response tokens, and estimated session costs
 
 ## 🚀 Quick Start
+
+### Requirements
+
+- Node.js 20+
+- An OpenAI API key for the API example
 
 ### Installation
 
 ```bash
-# Clone the repository
 git clone https://github.com/laurentknauss/TokenAnalyzer.git
 cd TokenAnalyzer
-
-# Install dependencies
 npm install
-
-# Set up environment variables
 cp .env.example .env
 # Edit .env and add your OpenAI API key
 ```
@@ -46,53 +47,61 @@ npm start
 npm run dev
 ```
 
+The production build is emitted to `dist/` and the application starts from `dist/index.js`.
+
 ### Example Analysis
 
 ```typescript
-// Example: Analyze a prompt
 const prompt = "Explain quantum computing in simple terms";
 
-// TokenAnalyzer will show:
-// - Total tokens: 8
-// - Estimated cost: $0.00024 (GPT-4)
-// - Token breakdown by word
+// TokenAnalyzer reports:
+// - Token count
+// - Estimated input cost
+// - Token breakdown
+// - Efficiency metrics
 // - Optimization suggestions
 // - Model comparisons
 ```
+
+> **Note:** Cost figures are estimates based on the pricing table in `src/pricing.ts`. They are not guaranteed to match the final amount billed by the OpenAI API, and token counts calculated locally can differ from API usage because API requests include additional message/request overhead.
+
 ## 📦 Project Structure
 
 ```text
 .
 ├── src/                  TypeScript source code
+├── tests/                Node.js test suite
 ├── dist/                 Compiled JavaScript output
-├── .env                  Environment variables
 ├── .env.example          Environment variable example
 ├── README.md             Documentation
 ├── tsconfig.json         TypeScript configuration
 └── package.json          Dependencies and scripts
 ```
+
 ## 🔧 NPM Scripts
 
-- `npm run build` : Compile TypeScript to JavaScript in `dist/`  
-- `npm start`     : Run the application from `dist/index.js`  
+- `npm run build` : Compile TypeScript to JavaScript in `dist/`
+- `npm test`      : Run the Node.js test suite
+- `npm start`     : Run the application from `dist/index.js`
+- `npm run dev`   : Run directly from TypeScript source with `tsx`
 
 ## 🛠️ Key Features
 
-- **Token Analysis**: Get detailed token counts for any prompt before sending to OpenAI
-- **Cost Estimation**: Calculate exact costs across GPT-3.5, GPT-4, and other models
-- **Prompt Optimization**: AI-powered suggestions to reduce token usage without losing meaning
-- **Model Comparison**: Side-by-side comparison of token counts across different models
-- **Session Statistics**: Track total tokens, costs, and API usage over time
-- **JSON Export**: Save analysis results and statistics for later review
-- **Real-time Feedback**: Instant token breakdown and optimization recommendations  
+- **Token Analysis**: Get detailed token counts for prompts and responses
+- **Input/Output Cost Estimation**: Apply separate input and output pricing when estimating API costs
+- **Prompt Optimization**: Normalize whitespace and punctuation and identify simple optimization opportunities
+- **Model Comparison**: Compare token counts and estimated costs across configured models
+- **Session Statistics**: Track total prompt tokens, response tokens, requests, and estimated cost
+- **JSON Export**: Save session statistics as a dated JSON file
+- **Real-time Feedback**: Display token and cost information directly in the terminal
 
 ## 💡 Use Cases
 
-- **API Cost Optimization**: Analyze prompts before production to reduce OpenAI costs
-- **Prompt Engineering**: Test different prompt variations and choose the most efficient one
-- **Budget Planning**: Estimate API costs for your application based on expected usage
-- **Development Testing**: Debug token-related issues during development
-- **Model Selection**: Determine the most cost-effective model for your use case
+- **API Cost Optimization**: Identify prompts that may be reduced before production use
+- **Prompt Engineering**: Compare prompt variants and inspect their token usage
+- **Budget Planning**: Estimate API costs from expected token volumes
+- **Development Testing**: Inspect tokenization during development
+- **Model Selection**: Compare token usage and configured pricing between models
 
 ## 🤝 Contributing
 
@@ -109,77 +118,40 @@ Quick start:
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
-📁 Project Architecture
+## 📁 Project Architecture
 
 ```text
 src/
-├── types.ts           # 🏗️ TypeScript Definitions
-├── pricing.ts         # 💰 Price and model management
-├── tokenAnalysis.ts   # 🔍 Token analysis and processing
-├── sessionStats.ts    # 📊 Session statistics
-├── display.ts         # 🖥️ Display and formatting
-└── index.ts           # 🚀 Main entry point
+├── types.ts           # TypeScript definitions
+├── pricing.ts         # Pricing and model management
+├── tokenAnalysis.ts   # Token analysis and processing
+├── sessionStats.ts    # Session statistics
+├── display.ts         # Terminal display and formatting
+└── index.ts           # Main entry point
 ```
 
-📄 Detailed description of each file
+### Detailed description
 
-**types.ts** - 🏗️ TypeScript Foundations  
-**Role:** Defines all interfaces and types used in the application  
-**Contains:**
-- **TokenAnalysis:** Structure of token analyses
-- **ModelPricing:** Model pricing
-- **SessionStats:** Session statistics
-- **OptimizationResult:** Optimization results
-- **Utility types** (UseCase, TokenType, etc.)
+**types.ts** — Defines interfaces and types used throughout the application, including `TokenAnalysis`, `ModelPricing`, `SessionStats`, `OptimizationResult`, and utility types such as `TokenType`.
 
-**pricing.ts** - 💰 Economic Manager  
-**Role:** Handles everything related to model pricing and recommendations  
-**Main functions:**
-- **MODEL_PRICING:** 2025 pricing database
-- **calculateCost():** Calculates the cost of a request
-- **getModelRecommendation():** Recommends a model based on usage
-- **getPricingEvolution():** Compares 2024 vs 2025 prices
+**pricing.ts** — Contains the configured model-pricing table and cost/recommendation helpers. Pricing values should be reviewed whenever OpenAI pricing changes.
 
-**tokenAnalysis.ts** - 🔍 Analysis Engine  
-**Role:** Core of token analysis and optimization  
-**Main functions:**
-- **createEncoder():** Creates an encoder for a model
-- **analyzeTokens():** Complete analysis of a text
-- **optimizePrompt():** Optimizes a prompt to reduce tokens
-- **compareModels():** Compares tokens across different models
-- **getTokenBreakdown():** Breaks down tokens one by one
+**tokenAnalysis.ts** — Core analysis engine. Creates token encoders, analyzes text, calculates basic efficiency metrics, applies prompt-cleanup heuristics, and compares models. `analyzeTokens()` distinguishes input and output pricing.
 
-**sessionStats.ts** - 📊 Data Manager  
-**Role:** Manages statistics and data persistence  
-**Main functions:**
-- **createSessionStats():** Initializes a new session
-- **updateSessionStats():** Updates statistics
-- **saveSessionStats():** Saves as JSON
-- **displaySessionStats():** Displays the session summary
+**sessionStats.ts** — Creates, updates, displays, and persists session statistics.
 
-**display.ts** - 🖥️ User Interface  
-**Role:** Handles all console display and formatting  
-**Main functions:**
-- **displayDetailedReport():** Full analysis report
-- **displayModelComparison():** Shows model comparison
-- Table and statistics formatting
+**display.ts** — Formats analysis reports, model comparisons, API usage information, and estimated costs for terminal output.
 
-**index.ts** - 🚀 Orchestrator  
-**Role:** Entry point that coordinates all modules  
-**Responsibilities:**
-- Initializes OpenAI and the encoder
-- Orchestrates the analysis flow
-- Handles API calls
-- Coordinates result display
+**index.ts** — Application entry point. Loads environment configuration, initializes the OpenAI client and tokenizer, performs the example API request, and coordinates reporting and session statistics.
 
-🔄 Data Flow
+## 🔄 Data Flow
 
 ```text
 index.ts (orchestration)
     ↓
 tokenAnalysis.ts (prompt analysis)
     ↓
-pricing.ts (cost calculation)
+pricing.ts (cost estimation)
     ↓
 OpenAI API (call)
     ↓
