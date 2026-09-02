@@ -22,6 +22,7 @@
   "scripts": {
     "dev": "tsx src/index.ts",
     "build": "tsc",
+    "test": "node --import tsx --test tests/tokenAnalysis.test.ts",
     "start": "node dist/index.js"
   },
   "devDependencies": {
