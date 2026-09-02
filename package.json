@@ -33,8 +33,6 @@
   "dependencies": {
     "dotenv": "^16.0.0",
     "openai": "^4.0.0",
-    "@types/node": "24.0.4",
-    "typescript": "5.8.3",
     "tiktoken": "^1.0.0"
   }
 }
