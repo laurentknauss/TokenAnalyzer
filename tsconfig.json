@@ -1,9 +1,8 @@
-
 {
   "compilerOptions": {
     "target": "ES2022",
-    "module": "ESNext",
-    "moduleResolution": "node",
+    "module": "NodeNext",
+    "moduleResolution": "NodeNext",
     "strict": true,
     "esModuleInterop": true,
     "skipLibCheck": true,
@@ -21,4 +20,4 @@
     "node_modules",
     "dist"
   ]
-} 
+}
